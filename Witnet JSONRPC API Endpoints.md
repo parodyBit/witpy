@@ -1,5 +1,5 @@
 ---
-
+`
 
 
 
@@ -54,7 +54,7 @@ The JsonRPC method `create_mnemonics` is used to generate a [BIP39 mnemonic sent
 
 Where:
 
-- <length> : Is an integer indicating how many words the mnemonic sentence should have. Must be one of these: `12`, `15`, `18`, `21` or `24`.
+- `<length>` : Is an integer indicating how many words the mnemonic sentence should have. Must be one of these: `12`, `15`, `18`, `21` or `24`.
 
 ### Example
 
@@ -104,8 +104,8 @@ The JsonRPC method `validate_mnemonics` is used to validate that the mnemonic se
 
 Where:
 
-- <mnemonics> : Is a string containing the mnemonic sentence used for import. Must be a word length of: `12`, `15`, `18`, `21` or `24`.
-- <seed source> : Is the xprv string containing the password used.
+- `<mnemonics>` : Is a string containing the mnemonic sentence used for import. Must be a word length of: `12`, `15`, `18`, `21` or `24`.
+- `<seed source>` : Is the xprv string containing the password used.
 
 ### Example
 
@@ -158,8 +158,8 @@ The JsonRPC method `import_seed` is used to import a mnemonic sentence to recove
 
 Where:
 
-- <mnemonics> : Is a string containing the mnemonic sentence used for import. Must be word length of: `12`, `15`, `18`, `21` or `24`.
-- <seed> : Is a string used as a password to unlock the wallet being created from the import.
+- `<mnemonics>` : Is a string containing the mnemonic sentence used for import. Must be word length of: `12`, `15`, `18`, `21` or `24`.
+- `<seed>` : Is a string used as a password to unlock the wallet being created from the import.
 
 ### Example
 
@@ -216,11 +216,11 @@ The JsonRPC method `create_wallet` is used to generate a new Master Key for an e
 
 Where:
 
-- <name> : Is a human-friendly name for your the wallet. This param is optional.
-- <caption> : Is a human-friendly caption for your the wallet. This param is optional.
-- <password> : Is the password that will seed the key used to encrypt the wallet in the file system. The password must have at least eight characters.
-- <seed source> : Must be `mnemonics` or `xprv` and determines how the HD wallet master key will be generated from the data sent in the `seedData` param.
-- <seed data> : The data used for generating the new HD wallet master key.
+- `<name>` : Is a human-friendly name for your the wallet. This param is optional.
+- `<caption>` : Is a human-friendly caption for your the wallet. This param is optional.
+- `<password>` : Is the password that will seed the key used to encrypt the wallet in the file system. The password must have at least eight characters.
+- `<seed source>` : Must be `mnemonics` or `xprv` and determines how the HD wallet master key will be generated from the data sent in the `seedData` param.
+- `<seed data>` : The data used for generating the new HD wallet master key.
 
 ### Example
 
@@ -278,10 +278,10 @@ The JsonRPC method `update_wallet` is used to update the name and/or caption of 
 
 Where:
 
-- <name> : Is a human-friendly name for your the wallet. This param is optional.
-- <caption> : Is a human-friendly caption for your the wallet. This param is optional.
-- <wallet id> : *String*. Is the ID associated to the wallet. See [get_wallet_infos](#get-wallet-infos).
-- <session id> : is the string obtained from from unlocking the wallet. See [Unlock Wallet](#unlock_wallet).
+- `<name>` : Is a human-friendly name for your the wallet. This param is optional.
+- `<caption>` : Is a human-friendly caption for your the wallet. This param is optional.
+- `<wallet id>` : *String*. Is the ID associated to the wallet. See [get_wallet_infos](#get-wallet-infos).
+- `<session id>` : is the string obtained from from unlocking the wallet. See [Unlock Wallet](#unlock_wallet).
 
 ### Example
 
@@ -329,8 +329,8 @@ The JsonRPC method `unlock_wallet` is used to *unlock* the wallet with the speci
 
 Where:
 
-- <wallet id> : *String*. Is the ID associated to the wallet. See [get_wallet_infos](#get-wallet-infos).
-- <password> : *String*. The password that unlocks the wallet.
+- `<wallet id>` : *String*. Is the ID associated to the wallet. See [get_wallet_infos](#get-wallet-infos).
+- `<password>` : *String*. The password that unlocks the wallet.
 
 ### Example
 
@@ -385,8 +385,8 @@ The JsonRPC method `lock_wallet` is used to *lock* the wallet with the specified
 
 Where:
 
-- <wallet id> : *String*. Is the ID associated to the wallet. See [get_wallet_infos](#get-wallet-infos).
-- <session id> : *String*. The session ID assigned to you when you unlocked the wallet. See [unlock_wallet](#unlock_wallet).
+- `<wallet id>` : *String*. Is the ID associated to the wallet. See [get_wallet_infos](#get-wallet-infos).
+- `<session id>` : *String*. The session ID assigned to you when you unlocked the wallet. See [unlock_wallet](#unlock_wallet).
 
 ### Example
 
@@ -491,11 +491,11 @@ TODO
 
 Where:
 
-- <wallet id> : *String*. Is the ID associated to the wallet. See [get_wallet_infos](#get-wallet-infos).
-- <session id> :*String*. The session ID assigned to you when you unlocked the wallet. See [unlock_wallet](#unlock-wallet).
+- `<wallet id>` : *String*. Is the ID associated to the wallet. See [get_wallet_infos](#get-wallet-infos).
+- `<session id>` :*String*. The session ID assigned to you when you unlocked the wallet. See [unlock_wallet](#unlock-wallet).
 
-- <pkh> : destination public key hash
-- <value> :
+- `<pkh> `: destination public key hash
+- `<value> `:
 - <fee> :
 - <time lock> :
 
@@ -598,7 +598,7 @@ Where:
 
 - <method> : is a supported retrieve method, e.g.: `HTTP-GET`
 
-- <epoch> : is an integer indicating that the data request shouldn't run before that epoch, this parameter is ignored by the this API method.
+- `<epoch>` : is an integer indicating that the data request shouldn't run before that epoch, this parameter is ignored by the this API method.
 
 - <filter operator> is an integer indicating the operator to be used for the filter operation.
 
@@ -736,7 +736,7 @@ Use this method `subscribe_notifications` to subscribe to update events related 
 
 Where:
 
-- <sesison id> : *String*. The session ID assigned to you when you unlocked the wallet. See [unlock_wallet](#unlock_wallet)
+- `<session id>` : *String*. The session ID assigned to you when you unlocked the wallet. See [unlock_wallet](#unlock_wallet)
 
 ### Example
 
@@ -787,7 +787,7 @@ Use this method to unsubscribe to update events related to your session wallets.
 
 Where:
 
-- <subscription id> : The subscription id you received when you subscribed. See [subscribe_notifications](#subscribe_notifications)
+- `<subscription id>` : The subscription id you received when you subscribed. See [subscribe_notifications](#subscribe_notifications)
 
 ### Example
 
@@ -894,8 +894,8 @@ The JsonRPC method `send_transaction` is used to ...
 
 Where:
 
-- <wallet id> : *String*. Is the ID associated to the wallet. See [get_wallet_infos](#get-wallet-infos).
-- <session id> :*String*. The session ID assigned to you when you unlocked the wallet. See [unlock_wallet](#unlock-wallet).
+- `<wallet id>` : *String*. Is the ID associated to the wallet. See [get_wallet_infos](#get-wallet-infos).
+- `<session id>` :*String*. The session ID assigned to you when you unlocked the wallet. See [unlock_wallet](#unlock-wallet).
 
 ### Example
 
@@ -943,8 +943,8 @@ The JsonRPC method `generate_address` is used to generate an address for the giv
 
 Where:
 
-- <session id> :
-- <wallet id> :
+- `<session id>` :
+- `<wallet id>` :
 
 
 
@@ -1001,9 +1001,9 @@ The JsonRPC method `get_addresses` is used to generate an address for the given 
 
 Where:
 
-- <session id> :
-- <wallet id> : 
-- <limit> :
+- `<session id>` :
+- `<wallet id>` : 
+- `<limit>` :
 
 
 
@@ -1109,8 +1109,8 @@ The JsonRPC method `create_data_request` is used to construct a Data Request.
 
 Where:
 
-- <session id> :
-- <wallet id> : 
+- `<session id>` :
+- `<wallet id>` : 
 - <rad request> :
 - <witness reward> :
 - <witnesses> : 
@@ -1342,8 +1342,8 @@ Where:
 
 - `"block_header":`
   - `"beacon":`
-    - <checkpoint> :
-    - <previous hash id> :
+    - `<checkpoint>` :
+    - `<previous hash id>` :
   - `"merkle_roots":`
     - <commit hash> :
     - <dr hash> :
@@ -1399,8 +1399,8 @@ Where:
 
 Where:
 
-- <epoch> :  the first epoch for which to show block hashes. A negative epoch means "n epochs ago".
-- <limit> : the number of epochs. If zero, unlimited. A negative limit retrieves epochs previous to `epoch`.
+- `<epoch>` :  the first epoch for which to show block hashes. A negative epoch means "n epochs ago".
+- `<limit>` : the number of epochs. If zero, unlimited. A negative limit retrieves epochs previous to `epoch`.
 
 #### Example
 
