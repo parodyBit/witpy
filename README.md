@@ -56,11 +56,37 @@ All the functions in `witnet_client_py/wallet/client.py` act as a direct passthr
 An example of requests:
 
 ```
-client.create_mnemonics(length=12)
+from witnet_client_py import WalletClient, RadRequest
+
+
+rad_request = RadRequest()
+ticker = script_from_str('parseMapJSON().getFloat("open")')
+current_price = script_from_str('parseMapJSON().getMap("bpi").getMap("USD").getFloat("rate_float")')
+
+rad_request.add_script(kind='HTTP-GET',
+                       url='https://www.bitstamp.net/api/ticker/',
+                       script=ticker.encode())
+
+rad_request.add_script(kind='HTTP-GET',
+                       url='https://api.coindesk.com/v1/bpi/currentprice.json',
+                       script=current_price.encode())
+rad = client.run_rad_request(rad_request=rad_request.to_json())
+print(rad)
+
+
+
+
 
 ```
 
 
+
+Output:
+
+```
+
+{'result': 'RadonReport { metadata: Tally(TallyMetaData { liars: [false], consensus: 0.0 }), result: Float(RadonFloat { value: 6856.26085 }), running_time: 21.4µs }'}
+```
 
 
 
