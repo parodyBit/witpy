@@ -50,9 +50,9 @@ The example will retrieve a `Float` from a JSON file.
 
  ```
 parseMapJSON().getFloat("last")		<- High Level
-[0x77, [0x64, 'last']]				<- RADON script
-821877821864646c617374				<- CBOR as Hex
-ghh3ghhkZGxhc3Q=					<- Base64 of CBOR
+[0x77, [0x64, 'last']]			<- RADON script
+821877821864646c617374			<- CBOR as Hex
+ghh3ghhkZGxhc3Q=			<- Base64 of CBOR
 [130, 24, 119, 130, 24, 100, 100, 108, 97, 115, 116] <- CBOR Byte Array. Only 11 Bytes
  ```
 
