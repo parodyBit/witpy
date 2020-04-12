@@ -44,7 +44,7 @@ RADON scripts are encoded using [CBOR](https://cbor.io), a very efficient, compa
 
 ### Example:
 
-This of a working RADON script.  In several different formats.  Starting with the high level so we know what is happening.
+This of a working RADON script.  
 
 The example will retrieve a `Float` from a JSON file.
 
@@ -60,7 +60,7 @@ an example of navigating nested JSON to retrieve a  `Float`.
 
 ```
 parseMapJSON().getMap("bpi").getMap("USD").getFloat("rate_float")	<- High Level
-[119, [102, 'bpi'], [102, 'USD'], [100, 'rate_float']]				<- RADON script
+[119, [102, 'bpi'], [102, 'USD'], [100, 'rate_float']]			<- RADON script
 84187782186663627069821866635553448218646a726174655f666c6f6174		<- CBOR as Hex
 hBh3ghhmY2JwaYIYZmNVU0SCGGRqcmF0ZV9mbG9hdA==						<- Base64 of CBOR
 CBOR Byte Array.
@@ -176,9 +176,15 @@ After the Witnesses **retrieve** the `Float` from both sources,  the **aggregate
 
 
 
-
-
 ### PSEUDOTYPES.ANY
+
+| Name       | Byte Value | Next Type            |
+| ---------- | ---------- | -------------------- |
+| `identity` | `0x00`     | `[PSEUDOTYPES.SAME]` |
+
+----
+
+### PSEUDOTYPES.ARRAY
 
 
 | Name         | Byte Value | Next Type                 |
