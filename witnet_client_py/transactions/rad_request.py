@@ -3,7 +3,7 @@ class RadRequest:
     def __init__(self):
         self.time_lock = 0
         self.retrieve = []
-        self.aggregate = {'filters': [], 'reducer': 3}
+        self.aggregate = {'filters': [],'reducer':3}
         self.tally = {'filters': [], 'reducer': 3}
 
     def add_script(self, kind='', url='', script=None):

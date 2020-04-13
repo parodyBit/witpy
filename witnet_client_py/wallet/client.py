@@ -42,7 +42,7 @@ class WalletClient:
             async with websockets.connect(f"ws://{self.url}/") as ws:
                 try:
                     response = await WebSocketsClient(ws).request(command, **kwargs)
-                    # print(response)
+
                 except ReceivedErrorResponseError as error:
                     print('Response Error: ', error.response.code, error.response.message)
                 except ReceivedNon2xxResponseError as error:
@@ -102,6 +102,9 @@ class WalletClient:
 
     def get_transactions(self, **kwargs):
         return self.poll_server(command='get_transactions', **kwargs)
+
+    def send_transaction(self, **kwargs):
+        return self.poll_server(command='send_transaction', **kwargs)
 
     def unsubscribe_notifications(self, **kwargs):
         return self.poll_server(command='unsubscribe_notifications', **kwargs)

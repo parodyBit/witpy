@@ -24,3 +24,4 @@ class DataRequest:
             "extra_reveal_rounds": self.extra_reveal_rounds,
             "min_consensus_percentage": self.min_consensus_percentage,
         }
+

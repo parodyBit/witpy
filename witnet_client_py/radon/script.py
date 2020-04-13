@@ -27,6 +27,9 @@ def cbor_to_radon(script):
 def parse_op(op):
     operator = op.split('(')[0]
     var = re.findall('"([^"]*)"', op)
+    val = op[op.find("(")+1:op.find(")")]
+    if val.isdigit():
+        var = int(val)
     return [operator, var]
 
 
@@ -103,7 +106,10 @@ def script_from_str(string):
                 except KeyError:
                     pass
         try:
-            val = 0 if len(op[1]) < 1 else op[1][0]
+            if type(op[1]) is int:
+                val = op[1]
+            else:
+                val = 0 if len(op[1]) < 1 else op[1][0]
             script.script.append([typeSystem[last_type][op[0]][0], val])
             next_type = typeSystem[next_type][op[0]][1][0]
         except KeyError:
