@@ -55,6 +55,7 @@ wallet_id = 'my-wallet-id'
 session_id = client.unlock_wallet(wallet_id=wallet_id, password='secret')['session_id']
 
 rad_request = RadRequest()
+
 ticker1 = script_from_str('parseMapJSON().getFloat("last")')
 rad_request.add_script(kind='HTTP-GET', url='https://www.bitstamp.net/api/ticker/', script=ticker1.encode())
 
@@ -62,7 +63,6 @@ ticker2 = script_from_str('parseMapJSON().getMap("USD").getFloat("last")')
 rad_request.add_script(kind='HTTP-GET', url='https://blockchain.info/ticker', script=ticker2.encode())
 
 ticker3 = script_from_str('parseMapJSON().getMap("bpi").getMap("USD").getFloat("rate_float")')
-rad_request.add_script(kind='HTTP-GET', url='https://blockchain.info/ticker', script=ticker2.encode())
 rad_request.add_script( kind='HTTP-GET', url='https://api.coindesk.com/v1/bpi/currentprice.json', script=ticker3.encode())
 
 
