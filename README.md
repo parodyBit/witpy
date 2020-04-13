@@ -51,35 +51,49 @@ An example of requests:
 ```
 from witnet_client_py import WalletClient, RadRequest, script_from_str
 
+wallet_id = 'my-wallet-id'
+session_id = client.unlock_wallet(wallet_id=wallet_id, password='secret')['session_id']
 
 rad_request = RadRequest()
-ticker = script_from_str('parseMapJSON().getFloat("open")')
-current_price = script_from_str('parseMapJSON().getMap("bpi").getMap("USD").getFloat("rate_float")')
+ticker1 = script_from_str('parseMapJSON().getFloat("last")')
+rad_request.add_script(kind='HTTP-GET', url='https://www.bitstamp.net/api/ticker/', script=ticker1.encode())
 
-rad_request.add_script(kind='HTTP-GET',
-                       url='https://www.bitstamp.net/api/ticker/',
-                       script=ticker.encode())
+ticker2 = script_from_str('parseMapJSON().getMap("USD").getFloat("last")')
+rad_request.add_script(kind='HTTP-GET', url='https://blockchain.info/ticker', script=ticker2.encode())
 
-rad_request.add_script(kind='HTTP-GET',
-                       url='https://api.coindesk.com/v1/bpi/currentprice.json',
-                       script=current_price.encode())
+ticker3 = script_from_str('parseMapJSON().getMap("bpi").getMap("USD").getFloat("rate_float")')
+rad_request.add_script(kind='HTTP-GET', url='https://blockchain.info/ticker', script=ticker2.encode())
+rad_request.add_script( kind='HTTP-GET', url='https://api.coindesk.com/v1/bpi/currentprice.json', script=ticker3.encode())
+
+
 rad = client.run_rad_request(rad_request=rad_request.to_json())
 print(rad)
 
+request = {
+    'data_request': rad_request.to_json(),
+    'witness_reward': 1000,
+    'witnesses': 20,
+    'backup_witnesses': 5,
+    'commit_fee': 1,
+    'reveal_fee': 1,
+    'tally_fee': 1,
+    'extra_commit_rounds': 3,
+    'extra_reveal_rounds': 3,
+    'min_consensus_percentage': 51
+}
+
+data_request = client.create_data_request(session_id=session_id, wallet_id=wallet_id, request=request, fee=1)
+print(data_request)
+
+response = client.send_transaction(session_id=session_id, wallet_id=wallet_id, transaction=data_request['transaction'])
+print(data_request)
+
+
+
 
 
 
 
 ```
-
-
-
-Output:
-
-```
-
-{'result': 'RadonReport { metadata: Tally(TallyMetaData { liars: [false], consensus: 0.0 }), result: Float(RadonFloat { value: 6856.26085 }), running_time: 21.4µs }'}
-```
-
 
 
