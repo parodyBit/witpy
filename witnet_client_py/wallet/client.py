@@ -35,7 +35,6 @@ class WalletClient:
     def set_url_port(self, url='', port=0):
         self.url = f'{url}:{port}'
 
-
     def poll_server(self, command='', **kwargs):
         async def _request():
             response = None
@@ -59,7 +58,6 @@ class WalletClient:
     def create_mnemonics(self, **kwargs):
         return self.poll_server(command='create_mnemonics', **kwargs)
 
-
     def create_wallet(self, **kwargs):
         return self.poll_server(command='create_wallet', **kwargs)
 
@@ -74,8 +72,7 @@ class WalletClient:
     def run_rad_request(self, **kwargs):
         return self.poll_server(command='run_rad_request', **kwargs)
 
-    # close_session(sessionId = '<session id>')
-
+    # close_session(sessionId ='')
     def close_session(self, **kwargs):
         return self.poll_server(command='close_session', **kwargs)
 
@@ -117,8 +114,25 @@ class WalletClient:
 
     # Forwarded methods
 
-    def get_block(self, **kwargs):
-        return self.poll_server(command='get_block', **kwargs)
+    # this method is the only one to pass a list instead of a map for **kwargs
+    # need to refactor
+    def get_block(self, block):
+        async def _request():
+            response = None
+            async with websockets.connect(f"ws://{self.url}/") as ws:
+                try:
+                    response = await WebSocketsClient(ws).request('get_block', block)
+
+                except ReceivedErrorResponseError as error:
+                    print('Response Error: ', error.response.code, error.response.message)
+                except ReceivedNon2xxResponseError as error:
+                    print(error)
+            if response is None:
+                return response
+            else:
+                return response.data.result
+
+        return asyncio.get_event_loop().run_until_complete(_request())
 
     def get_block_chain(self, **kwargs):
         return self.poll_server(command='get_block_chain', **kwargs)
