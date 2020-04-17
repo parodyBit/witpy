@@ -143,9 +143,6 @@ class Source(Script):
 
     def encode(self):
         script = []
-        print(self.types)
-        print(self.ops)
-        print(self.args)
         idx = 0
         for op in self.ops:
             _type, arg = self.types[idx], self.args[idx]
@@ -156,7 +153,6 @@ class Source(Script):
                 script.append(type_system[_type][op][0])
             # last item?
             elif idx == len(self.args) - 1:
-                print('[arg] ', arg)
                 if arg is None:
                     script.append(type_system[_type][op][0])
                 else:

@@ -4,9 +4,8 @@ from witnet_client_py.util import radon_to_cbor
 class DataRequest:
     def __init__(self):
         self.data_request = {'aggregate': {'filters': [], 'reducer': None},
-                             'retrieve': [],
-                             'tally': {'filters': [], 'reducer': None}
-                             }
+                             'retrieve': [], 'tally': {'filters': [], 'reducer': None}, 'time_lock': 0}
+        self.value = 0
         self.witness_reward = 1
         self.witnesses = 1
         self.backup_witnesses = 1
@@ -54,9 +53,17 @@ class DataRequest:
         self.reveal_fee = reveal_fee
         self.tally_fee = tally_fee
         return self
+
+    def schedule(self, timestamp):
+        self.data_request['time_lock'] = timestamp
+
+    def create(self):
+        pass
+
     def to_json(self):
         return {
             "data_request": self.data_request,
+            'fee': self.value,
             "witness_reward": self.witness_reward,
             "witnesses": self.witnesses,
             "backup_witnesses": self.backup_witnesses,
