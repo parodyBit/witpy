@@ -1,0 +1,3 @@
+
+class RadonTypeError(Exception):
+    pass

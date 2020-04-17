@@ -1,4 +1,4 @@
-# witnet_client_py
+witnet_client_py
 
 
 
@@ -18,7 +18,15 @@ This is a work in progress and under development and not intended to function as
 
 
 
-Install:
+
+
+Quick Install:
+
+```
+$ pip install -r requirements.txt
+```
+
+
 
 Until I work this into an actual package, just copy the witnet_client_py folder into your project.
 
@@ -28,10 +36,7 @@ Usage:
 
 Must have a Witnet node running. See the [Github](https://github.com/witnet) for more information. 
 
-```
-witnet node server
-witnet wallet server 
-```
+
 
 The `WalletClient` is a singleton and can be retrieved by:
 
@@ -86,7 +91,7 @@ data_request = client.create_data_request(session_id=session_id, wallet_id=walle
 print(data_request)
 
 response = client.send_transaction(session_id=session_id, wallet_id=wallet_id, transaction=data_request['transaction'])
-print(data_request)
+print(response)
 
 
 

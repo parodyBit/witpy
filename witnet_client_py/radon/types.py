@@ -9,6 +9,7 @@ class TYPES:
     BYTES = 'Bytes'
     RESULT = 'Result'
 
+
 # Pseudo-type names
 class PSEUDOTYPES:
     ANY = 'Any'
@@ -22,36 +23,36 @@ class REDUCERS:
     min = 0x00
     max = 0x01
     mode = 0x02
-    averageMean = 0x03
-    averageMeanWeighted = 0x04
-    averageMedian = 0x05
-    averageMedianWeighted = 0x06
-    deviationStandard = 0x07
-    deviationAverage = 0x08
-    deviationMedian = 0x09
-    deviationMaximum = 0x0A
+    average_mean = 0x03
+    average_mean_weighted = 0x04
+    average_median = 0x05
+    average_median_weighted = 0x06
+    deviation_standard = 0x07
+    deviation_average = 0x08
+    deviation_median = 0x09
+    deviation_maximum = 0x0A
 
 
 class FILTERS:
-    greaterThan = 0x00
-    lessThan = 0x01
+    greater_than = 0x00
+    less_than = 0x01
     equals = 0x02
-    deviationAbsolute = 0x03
-    deviationRelative = 0x04
-    deviationStandard = 0x05
+    deviation_absolute = 0x03
+    deviation_relative = 0x04
+    deviation_standard = 0x05
     top = 0x06
     bottom = 0x07
-    lessOrEqualThan = 0x80
-    greaterOrEqualThan = 0x81
-    notEquals = 0x82
-    notDeviationAbsolute = 0x83
-    notDeviationRelative = 0x84
-    notDeviationStandard = 0x85
-    notTop = 0x86
-    notBottom = 0x87
+    less_or_equal_than = 0x80
+    greater_or_equal_than = 0x81
+    not_equals = 0x82
+    not_deviation_absolute = 0x83
+    not_deviation_relative = 0x84
+    not_deviation_standard = 0x85
+    not_top = 0x86
+    not_bottom = 0x87
 
 
-typeSystem = {
+type_system = {
     'Any': {
         'identity': [0x00, [PSEUDOTYPES.SAME]],
     },
@@ -59,13 +60,13 @@ typeSystem = {
         'count': [0x10, [TYPES.INTEGER]],
         'filter': [0x11, [PSEUDOTYPES.SAME]],
         'flatten': [0x12, [PSEUDOTYPES.INNER]],
-        'getArray': [0x13, [PSEUDOTYPES.INNER]],
-        'getBoolean': [0x14, [TYPES.BOOLEAN]],
-        'getBytes': [0x15, [TYPES.BYTES]],
-        'getFloat': [0x16, [TYPES.FLOAT]],
-        'getInteger': [0x17, [TYPES.INTEGER]],
-        'getMap': [0x18, [TYPES.MAP]],
-        'getString': [0x19, [TYPES.STRING]],
+        'get_array': [0x13, [PSEUDOTYPES.INNER]],
+        'get_boolean': [0x14, [TYPES.BOOLEAN]],
+        'get_bytes': [0x15, [TYPES.BYTES]],
+        'get_float': [0x16, [TYPES.FLOAT]],
+        'get_integer': [0x17, [TYPES.INTEGER]],
+        'get_map': [0x18, [TYPES.MAP]],
+        'get_string': [0x19, [TYPES.STRING]],
         'map': [0x1A, [PSEUDOTYPES.SUBSCRIPT]],
         'reduce': [0x1B, [PSEUDOTYPES.INNER]],
         'some': [0x1C, [TYPES.BOOLEAN]],
@@ -73,20 +74,20 @@ typeSystem = {
         'take': [0x1E, [PSEUDOTYPES.SAME]],
     },
     'Boolean': {
-        'asString': [0x20, [TYPES.STRING]],
+        'as_string': [0x20, [TYPES.STRING]],
         'match': [0x21, [PSEUDOTYPES.MATCH]],
         'negate': [0x22, [TYPES.BOOLEAN]]
     },
     'Bytes': {
-        'asString': [0x30, [TYPES.STRING]],
+        'as_string': [0x30, [TYPES.STRING]],
         'hash': [0x31, [TYPES.BYTES]]
     },
     'Integer': {
         'absolute': [0x40, [TYPES.INTEGER]],
-        'asFloat': [0x41, [TYPES.FLOAT]],
-        'asString': [0x42, [TYPES.STRING]],
-        'greaterThan': [0x43, [TYPES.BOOLEAN]],
-        'lessThan': [0x44, [TYPES.BOOLEAN]],
+        'as_float': [0x41, [TYPES.FLOAT]],
+        'as_string': [0x42, [TYPES.STRING]],
+        'greater_than': [0x43, [TYPES.BOOLEAN]],
+        'less_than': [0x44, [TYPES.BOOLEAN]],
         'match': [0x45, [PSEUDOTYPES.MATCH]],
         'modulo': [0x46, [TYPES.INTEGER]],
         'multiply': [0x47, [TYPES.INTEGER]],
@@ -99,9 +100,9 @@ typeSystem = {
         'absolute': [0x50, [TYPES.FLOAT]],
         'asString': [0x51, [TYPES.STRING]],
         'ceiling': [0x52, [TYPES.INTEGER]],
-        'greaterThan': [0x53, [TYPES.BOOLEAN]],
+        'greater_than': [0x53, [TYPES.BOOLEAN]],
         'floor': [0x54, [TYPES.INTEGER]],
-        'lessThan': [0x55, [TYPES.BOOLEAN]],
+        'less_than': [0x55, [TYPES.BOOLEAN]],
         'modulo': [0x56, [TYPES.FLOAT]],
         'multiply': [0x57, [TYPES.FLOAT]],
         'negate': [0x58, [TYPES.FLOAT]],
@@ -114,33 +115,33 @@ typeSystem = {
     'Map': {
         # `entries` needs to be deprecated
         'entries': [0x60, [PSEUDOTYPES.SAME]],
-        'getArray': [0x61, [TYPES.ARRAY]],
-        'getBoolean': [0x62, [TYPES.BOOLEAN]],
-        'getBytes': [0x63, [TYPES.BYTES]],
-        'getFloat': [0x64, [TYPES.FLOAT]],
-        'getInteger': [0x65, [TYPES.INTEGER]],
-        'getMap': [0x66, [TYPES.MAP]],
-        'getString': [0x67, [TYPES.STRING]],
+        'get_array': [0x61, [TYPES.ARRAY]],
+        'get_boolean': [0x62, [TYPES.BOOLEAN]],
+        'get_bytes': [0x63, [TYPES.BYTES]],
+        'get_float': [0x64, [TYPES.FLOAT]],
+        'get_integer': [0x65, [TYPES.INTEGER]],
+        'get_map': [0x66, [TYPES.MAP]],
+        'get_string': [0x67, [TYPES.STRING]],
         'keys': [0x68, [TYPES.ARRAY, TYPES.STRING]],
-        'valuesAsArray': [0x69, [TYPES.ARRAY, TYPES.ARRAY]],
-        'valuesAsBoolean': [0x6A, [TYPES.ARRAY, TYPES.BOOLEAN]],
-        'valuesAsBytes': [0x6B, [TYPES.ARRAY, TYPES.BYTES]],
-        'valuesAsInteger': [0x6C, [TYPES.ARRAY, TYPES.INTEGER]],
-        'valuesAsFloat': [0x6D, [TYPES.ARRAY, TYPES.FLOAT]],
-        'valuesAsMap': [0x6E, [TYPES.ARRAY, TYPES.MAP]],
-        'valuesAsString': [0x6F, [TYPES.ARRAY, TYPES.STRING]],
+        'values_as_array': [0x69, [TYPES.ARRAY, TYPES.ARRAY]],
+        'values_as_boolean': [0x6A, [TYPES.ARRAY, TYPES.BOOLEAN]],
+        'values_as_bytes': [0x6B, [TYPES.ARRAY, TYPES.BYTES]],
+        'values_as_integer': [0x6C, [TYPES.ARRAY, TYPES.INTEGER]],
+        'values_as_float': [0x6D, [TYPES.ARRAY, TYPES.FLOAT]],
+        'values_as_map': [0x6E, [TYPES.ARRAY, TYPES.MAP]],
+        'values_as_string': [0x6F, [TYPES.ARRAY, TYPES.STRING]],
     },
     'String': {
-        'asBoolean': [0x70, [TYPES.BOOLEAN]],
-        'asBytes': [0x71, [TYPES.BYTES]],
-        'asFloat': [0x72, [TYPES.FLOAT]],
-        'asInteger': [0x73, [TYPES.INTEGER]],
+        'as_boolean': [0x70, [TYPES.BOOLEAN]],
+        'as_bytes': [0x71, [TYPES.BYTES]],
+        'as_float': [0x72, [TYPES.FLOAT]],
+        'as_integer': [0x73, [TYPES.INTEGER]],
         'length': [0x74, [TYPES.INTEGER]],
         'match': [0x75, [PSEUDOTYPES.MATCH]],
-        'parseArrayJSON': [0x76, [TYPES.ARRAY]],
-        'parseMapJSON': [0x77, [TYPES.MAP]],
-        'parseXML': [0x78, [TYPES.MAP]],
-        'toLowerCase': [0x79, [TYPES.STRING]],
-        'toUpperCase': [0x7A, [TYPES.STRING]],
+        'parse_array_json': [0x76, [TYPES.ARRAY]],
+        'parse_map_json': [0x77, [TYPES.MAP]],
+        'parse_xml': [0x78, [TYPES.MAP]],
+        'to_lower_case': [0x79, [TYPES.STRING]],
+        'to_upper_case': [0x7A, [TYPES.STRING]],
     }
 }
