@@ -4,19 +4,11 @@ witnet_client_py
 
 witnet_client_py is a library for interfacing with the Witnet protocol. ( See [Witnet.io](https://witnet.io/) for more information )
 
-
-
-
-
 Built on top of websockets and jsonrpcclient, it provides an easy way to automate wallet operations by node operators and any one else who might find it useful.
-
-
 
 *Disclaimer:*
 
 This is a work in progress and under development and not intended to function as your main witnet wallet.
-
-
 
 
 
