@@ -59,17 +59,21 @@ from witnet_client_py import WalletClient, RadRequest, script_from_str
 wallet_id = 'my-wallet-id'
 session_id = client.unlock_wallet(wallet_id=wallet_id, password='secret')['session_id']
 
-rad_request = RadRequest()
+bitstamp = witnet.Source('https://www.bitstamp.net/api/ticker/').\
+    parse_map_json().get_float('last').multiply(1000).round()
 
-ticker1 = script_from_str('parseMapJSON().getFloat("last")')
-rad_request.add_script(kind='HTTP-GET', url='https://www.bitstamp.net/api/ticker/', script=ticker1.encode())
+coindesk = witnet.Source('https://api.coindesk.com/v1/bpi/currentprice.json').\
+    parse_map_json().get_map('bpi').get_map('USD').get_float('rate_float').multiply(1000).round()
 
-ticker2 = script_from_str('parseMapJSON().getMap("USD").getFloat("last")')
-rad_request.add_script(kind='HTTP-GET', url='https://blockchain.info/ticker', script=ticker2.encode())
+aggregator = witnet.Aggregator(
+    filters=[[witnet.FILTERS.deviation_standard, 1.5]],
+    reducer=witnet.REDUCERS.average_mean)
 
-ticker3 = script_from_str('parseMapJSON().getMap("bpi").getMap("USD").getFloat("rate_float")')
-rad_request.add_script( kind='HTTP-GET', url='https://api.coindesk.com/v1/bpi/currentprice.json', script=ticker3.encode())
+tally = witnet.Tally(
+    filters=[[FILTERS.deviation_standard, 1]],
+    reducer=REDUCERS.average_mean)
 
+rad_request = witnet.RadRequest().add_source(bitstamp).add_source(coindesk).set_aggregate(aggregator).set_tally(tally)
 
 rad = client.run_rad_request(rad_request=rad_request.to_json())
 print(rad)
@@ -86,8 +90,9 @@ request = {
     'extra_reveal_rounds': 3,
     'min_consensus_percentage': 51
 }
-
-data_request = client.create_data_request(session_id=session_id, wallet_id=wallet_id, request=request, fee=1)
+request = witnet.Request().add_source(bitstamp).add_source(coindesk).\
+    set_aggregate(aggregator).set_tally(tally).set_quorum(20, 5, 3, 3, 51).set_fees(10, 1, 1, 1)
+data_request = client.create_data_request(session_id=session_id, wallet_id=wallet_id, request=request.to_json(), fee=1)
 print(data_request)
 
 response = client.send_transaction(session_id=session_id, wallet_id=wallet_id, transaction=data_request['transaction'])
