@@ -1,5 +1,5 @@
 from .wallet import WalletClient
-from .radon import method_from_script, script_from_str
+from .radon import method_from_script, script_from_str, FILTERS, REDUCERS, Aggregator, Tally, Source
 from .transactions import Request, RadRequest
 
 from .util.cbor import radon_to_cbor, cbor_to_radon
