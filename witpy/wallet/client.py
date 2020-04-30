@@ -1,10 +1,11 @@
 import websockets
 import asyncio
 
-from jsonrpcclient.exceptions import ErrorResponse, ReceivedNon2xxResponseError, ReceivedErrorResponseError
+from jsonrpcclient.exceptions import ReceivedNon2xxResponseError, ReceivedErrorResponseError
 from jsonrpcclient.clients.websockets_client import WebSocketsClient
 
 wallet_url = '127.0.0.1:11212'
+
 
 class Wallet:
     def __init__(self, session_id=''):
@@ -23,7 +24,6 @@ class WalletClient:
             self.running = False
             self.wallet_thread = None
             self.set_url_port(url=url, port=port)
-
 
     @staticmethod
     def socket(url='127.0.0.1', port=11212):
@@ -55,53 +55,56 @@ class WalletClient:
 
     # length must be: 12, 15, 18, 21, 24
     # create_mnemonics(length=12)
-    def create_mnemonics(self, **kwargs):
-        return self.poll_server(command='create_mnemonics', **kwargs)
+    def create_mnemonics(self, length=12):
+        return self.poll_server(command='create_mnemonics', length=length)
 
-    def create_wallet(self, **kwargs):
-        return self.poll_server(command='create_wallet', **kwargs)
+    def create_wallet(self, name='', caption='', password='', seed_source='mnemonics/xprv', seed_data=''):
+        return self.poll_server(command='create_wallet', name=name, caption=caption,
+                                password=password, seed_source=seed_source, seed_data=seed_data)
 
-    # unlock_wallet(self, walletId='', password='')
-    def unlock_wallet(self, **kwargs):
-        return self.poll_server(command='unlock_wallet', **kwargs)
+    def unlock_wallet(self, wallet_id='', password=''):
+        return self.poll_server(command='unlock_wallet', wallet_id=wallet_id, password=password)
 
-    # lock_wallet(self, walletId='', sessionId='')
-    def lock_wallet(self, **kwargs):
-        return self.poll_server(command='lock_wallet', **kwargs)
+    def lock_wallet(self, wallet_id='', session_id=''):
+        return self.poll_server(command='lock_wallet', wallet_id=wallet_id, session_id=session_id)
 
-    def run_rad_request(self, **kwargs):
-        return self.poll_server(command='run_rad_request', **kwargs)
+    def run_rad_request(self, rad_request={}):
+        return self.poll_server(command='run_rad_request', rad_request=rad_request)
 
-    # close_session(sessionId ='')
-    def close_session(self, **kwargs):
-        return self.poll_server(command='close_session', **kwargs)
+    def close_session(self, session_id=''):
+        return self.poll_server(command='close_session', session_id=session_id)
 
-    def create_data_request(self, **kwargs):
-        return self.poll_server(command='create_data_request', **kwargs)
+    def create_data_request(self, wallet_id='', session_id='', request={}, fee=0):
+        return self.poll_server(command='create_data_request', wallet_id=wallet_id, session_id=session_id,
+                                request=request, fee=fee)
 
-    def create_vtt(self, **kwargs):
-        return self.poll_server(command='create_vtt', **kwargs)
+    def create_vtt(self, wallet_id='', session_id='', address='', amount=0, fee=0, time_lock=0):
+        return self.poll_server(command='create_vtt', wallet_id=wallet_id, session_id=session_id,
+                                address=address, amount=amount, fee=fee, time_lock=time_lock)
 
     def get_wallet_infos(self, **kwargs):
         return self.poll_server(command='get_wallet_infos', **kwargs)
 
-    def generate_address(self, **kwargs):
-        return self.poll_server(command='generate_address', **kwargs)
+    def generate_address(self, wallet_id='', session_id=''):
+        return self.poll_server(command='generate_address', wallet_id=wallet_id, session_id=session_id)
 
-    def get_addresses(self, **kwargs):
-        return self.poll_server(command='get_addresses', **kwargs)
+    def get_addresses(self, wallet_id='', session_id='', offset=0, limit=0):
+        return self.poll_server(command='get_addresses', wallet_id=wallet_id, session_id=session_id,
+                                offset=offset, limit=limit)
 
-    def import_seed(self, **kwargs):
-        return self.poll_server(command='import_seed', **kwargs)
+    def import_seed(self, mnemonics='', seed=''):
+        return self.poll_server(command='import_seed', mnemonics=mnemonics, seed=seed)
 
     def next_subscription_id(self, **kwargs):
         return self.poll_server(command='next_subscription_id', **kwargs)
 
-    def get_transactions(self, **kwargs):
-        return self.poll_server(command='get_transactions', **kwargs)
+    def get_transactions(self, wallet_id='', session_id='', offset=0, limit=0):
+        return self.poll_server(command='get_transactions', wallet_id=wallet_id, session_id=session_id,
+                                offset=offset, limit=limit)
 
-    def send_transaction(self, **kwargs):
-        return self.poll_server(command='send_transaction', **kwargs)
+    def send_transaction(self, wallet_id='', session_id='', transaction={}):
+        return self.poll_server(command='send_transaction', wallet_id=wallet_id, session_id=session_id,
+                                transaction=transaction)
 
     def unsubscribe_notifications(self, **kwargs):
         return self.poll_server(command='unsubscribe_notifications', **kwargs)
@@ -122,7 +125,6 @@ class WalletClient:
             async with websockets.connect(f"ws://{self.url}/") as ws:
                 try:
                     response = await WebSocketsClient(ws).request('get_block', block)
-
                 except ReceivedErrorResponseError as error:
                     print('Response Error: ', error.response.code, error.response.message)
                 except ReceivedNon2xxResponseError as error:
@@ -141,7 +143,7 @@ class WalletClient:
 
 
 def main():
-    wallet = WalletClient()
+    wallet = WalletClient().socket(url='127.0.0.1', port=11212)
     wallet.create_mnemonics(length=12)
 
 

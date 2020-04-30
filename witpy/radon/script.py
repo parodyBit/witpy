@@ -1,5 +1,5 @@
 from .types import *
-from witnet_client_py.util import radon_to_cbor, cbor_to_radon, valid_url, parse_op
+from witpy.util import radon_to_cbor, cbor_to_radon, valid_url, parse_op
 from queue import Queue
 
 
@@ -88,6 +88,7 @@ def script_from_str(string):
         if next_type is 'Inner':
             next_type = last_type
         elif next_type is 'Match':
+
             pass
         elif next_type is 'Same':
             pass
@@ -109,14 +110,20 @@ class Script:
 class Aggregator(Script):
     def __init__(self, filters=None, reducer=None):
         super().__init__()
-        self.filters = [{'args': filters[0][1], 'op': filters[0][0]}]
+        self.filters = [{
+            'args': filters[0][1],
+            'op': filters[0][0]
+        }]
         self.reducer = reducer
 
 
 class Tally(Script):
     def __init__(self, filters=None, reducer=None):
         super().__init__()
-        self.filters = [{'args': filters[0][1], 'op': filters[0][0]}]
+        self.filters = [{
+            'args': filters[0][1],
+            'op': filters[0][0]
+        }]
         self.reducer = reducer
 
 
@@ -147,7 +154,6 @@ class Source(Script):
         for op in self.ops:
             _type, arg = self.types[idx], self.args[idx]
 
-            # print(_type, op, arg, idx)
             # first item?
             if idx == 0:
                 script.append(type_system[_type][op][0])
