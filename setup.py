@@ -1,5 +1,9 @@
 from setuptools import setup, find_packages
 from os import path, system
+
+from codecs import open
+
+
 import sys
 here = path.abspath(path.dirname(__file__))
 
@@ -18,7 +22,14 @@ if sys.argv[-1] == 'publish':
     system('python setup.py sdist bdist_wheel')
     system('twine upload dist/*')
     sys.exit()
-
+test_requirements = [
+    'pytest-httpbin==0.0.7',
+    'pytest-cov',
+    'pytest-mock',
+    'pytest-xdist',
+    'PySocks>=1.5.6, !=1.5.7',
+    'pytest>=3'
+]
 packages = ['witpy']
 setup(
     name=about['__title__'],
@@ -52,6 +63,7 @@ setup(
                       'websockets',  # WebSocket servers and clients.
                       'zipp',  # A pathlib-compatible Zipfile object wrapper.
                       ],
+    tests_require=test_requirements,
     extras_require={  # Optional
     },
     project_urls={
