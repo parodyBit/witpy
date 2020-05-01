@@ -4,9 +4,9 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
+detox = "*"
 tox = "*"
 docutils = "*"
-detox = "*"
 apply-defaults = "==0.1.4"
 attrs = "==19.3.0"
 cbor = "==1.0.0"

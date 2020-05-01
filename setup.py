@@ -1,11 +1,35 @@
 from setuptools import setup, find_packages
 from os import path, system
 
+from setuptools.command.test import test as TestCommand
 from codecs import open
 
 
 import sys
 here = path.abspath(path.dirname(__file__))
+
+
+class PyTest(TestCommand):
+    user_options = [('pytest-args=', 'a', "Arguments to pass into py.test")]
+
+    def initialize_options(self):
+        TestCommand.initialize_options(self)
+        try:
+            from multiprocessing import cpu_count
+            self.pytest_args = ['-n', str(cpu_count()), '--boxed']
+        except (ImportError, NotImplementedError):
+            self.pytest_args = ['-n', '1', '--boxed']
+
+    def finalize_options(self):
+        TestCommand.finalize_options(self)
+        self.test_args = []
+        self.test_suite = True
+
+    def run_tests(self):
+        import pytest
+
+        errno = pytest.main(self.pytest_args)
+        sys.exit(errno)
 
 with open(path.join(here, 'README.md'), encoding='utf-8') as f:
     readme_txt = f.read()
@@ -23,11 +47,6 @@ if sys.argv[-1] == 'publish':
     system('twine upload dist/*')
     sys.exit()
 test_requirements = [
-    'pytest-httpbin==0.0.7',
-    'pytest-cov',
-    'pytest-mock',
-    'pytest-xdist',
-    'PySocks>=1.5.6, !=1.5.7',
     'pytest>=3'
 ]
 packages = ['witpy']
@@ -63,6 +82,7 @@ setup(
                       'websockets',  # WebSocket servers and clients.
                       'zipp',  # A pathlib-compatible Zipfile object wrapper.
                       ],
+    cmdclass={'test': PyTest},
     tests_require=test_requirements,
     extras_require={  # Optional
     },
