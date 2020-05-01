@@ -2,6 +2,7 @@ language: python
 os: linux
 dist: xenial
 python:
+ - '3.5'
  - '3.6'
  - '3.7'
 install: "make"
@@ -10,8 +11,14 @@ script:
 jobs:
   include:
     - stage: test
+      python: '3.5'
+    - stage: test
+      python: '3.6'
+    - stage: test
       python: '3.7'
-
+    - stage: test
+      python: 'pypy3'
+      dist: xenial
 deploy:
   provider: pypi
   username: parody_bit

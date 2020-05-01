@@ -18,6 +18,7 @@ if sys.argv[-1] == 'publish':
     system('python setup.py sdist bdist_wheel')
     system('twine upload dist/*')
     sys.exit()
+
 packages = ['witpy']
 setup(
     name=about['__title__'],
