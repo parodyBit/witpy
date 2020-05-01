@@ -19,8 +19,6 @@ six = "==1.14.0"
 websockets = "==8.1"
 zipp = "==3.1.0"
 pytest = "==5.3.3"
-[packages]
-"witpy" = {path = ".", editable = true,}
 
 [requires]
 python_version = "3.7"
