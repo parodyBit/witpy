@@ -4,16 +4,24 @@ from os import path
 here = path.abspath(path.dirname(__file__))
 
 with open(path.join(here, 'README.md'), encoding='utf-8') as f:
-    long_description = f.read()
+    readme_txt = f.read()
+
+with open(path.join(here, 'LICENSE.txt'), encoding='utf-8') as f:
+    license_txt = f.read()
+
+about = {}
+with open(path.join(here, 'witpy', '__version__.py'), mode='r', encoding='utf-8') as f:
+    exec(f.read(), about)
 
 setup(
-    name='witpy',
-    version='0.8.0',
-    description='A JSON RPC client for the Witnet Protocol.',
-    long_description=long_description,
+    name=about['__title__'],
+    version=about['__version__'],
+    description=about['__description__'],
+    long_description=readme_txt,
     long_description_content_type='text/markdown',
-    url='https://github.com/parodyBit/witpy/',
-    author_email='parody_bit@criptext.com',
+    author_email=about['__author_email__'],
+    url=about['__url__'],
+    license=license_txt,
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
@@ -21,7 +29,7 @@ setup(
         "License :: OSI Approved :: MIT License",
     ],
     keywords='witnet wallet client json',
-    package_dir={'': 'witpy'},
+    package_dir={'witpy': 'witpy'},
     packages=find_packages(where='witpy'),
     python_requires='>=3.5, <4',
     install_requires=['peppercorn',  # used to convert token stream into data structure html.
