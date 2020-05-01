@@ -2,7 +2,6 @@ language: python
 os: linux
 dist: xenial
 python:
- - '3.5'
  - '3.6'
  - '3.7'
 install: "make"
@@ -10,8 +9,6 @@ script:
  - make test
 jobs:
   include:
-    - stage: test
-      python: '3.5'
     - stage: test
       python: '3.6'
     - stage: test

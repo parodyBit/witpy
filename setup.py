@@ -38,7 +38,7 @@ setup(
     keywords='witnet wallet client json',
     package_dir={'witpy': 'witpy'},
     packages=packages,
-    python_requires='>=3.5, <4',
+    python_requires='>=3.6, <4',
     install_requires=['peppercorn',  # used to convert token stream into data structure html.
                       'apply-defaults',  # Apply default values to functions.
                       'attrs',  # overrides implicit detection in python.
