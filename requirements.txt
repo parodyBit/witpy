@@ -9,4 +9,4 @@ pyrsistent==0.16.0
 six==1.14.0
 websockets==8.1
 zipp==3.1.0
-pytest=5.3.3
+pytest==5.3.3
