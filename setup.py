@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
-from os import path
-
+from os import path, system
+import sys
 here = path.abspath(path.dirname(__file__))
 
 with open(path.join(here, 'README.md'), encoding='utf-8') as f:
@@ -13,6 +13,12 @@ about = {}
 with open(path.join(here, 'witpy', '__version__.py'), mode='r', encoding='utf-8') as f:
     exec(f.read(), about)
 
+# 'setup.py publish' shortcut.
+if sys.argv[-1] == 'publish':
+    system('python setup.py sdist bdist_wheel')
+    system('twine upload dist/*')
+    sys.exit()
+packages = ['witpy']
 setup(
     name=about['__title__'],
     version=about['__version__'],
@@ -30,7 +36,7 @@ setup(
     ],
     keywords='witnet wallet client json',
     package_dir={'witpy': 'witpy'},
-    packages=find_packages(where='witpy'),
+    packages=packages,
     python_requires='>=3.5, <4',
     install_requires=['peppercorn',  # used to convert token stream into data structure html.
                       'apply-defaults',  # Apply default values to functions.
@@ -52,5 +58,6 @@ setup(
         'Source': 'https://github.com/parodyBit/witpy/',
     },
 )
+
 
 
