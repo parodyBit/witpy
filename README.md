@@ -1,6 +1,6 @@
-witpy
+# witpy
 
-
+[![Build Status](https://travis-ci.org/parodyBit/witpy.svg?branch=master)](https://travis-ci.org/parodyBit/witpy)
 
 witpy is a library for interfacing with the Witnet protocol. ( See [Witnet.io](https://witnet.io/) for more information )
 
@@ -14,13 +14,9 @@ This is a work in progress and under development and not intended to function as
 
 Quick Install:
 
-```
-$ pip install -r requirements.txt
-```
+...
 
 
-
-Until I work this into an actual package, just copy the witpy folder into your project.
 
 
 
