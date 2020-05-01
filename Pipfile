@@ -1,0 +1,23 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+
+[packages]
+apply-defaults = "==0.1.4"
+attrs = "==19.3.0"
+cbor = "==1.0.0"
+click = "==6.7"
+importlib-metadata = "==1.6.0"
+jsonrpcclient = "==3.3.5"
+jsonschema = "==3.2.0"
+pyrsistent = "==0.16.0"
+six = "==1.14.0"
+websockets = "==8.1"
+zipp = "==3.1.0"
+pytest = "==5.3.3"
+
+[requires]
+python_version = "3.7"
