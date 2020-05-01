@@ -21,8 +21,8 @@ setup(
         "License :: OSI Approved :: MIT License",
     ],
     keywords='witnet wallet client json',
-    package_dir={'': 'src'},
-    packages=find_packages(where='src'),
+    package_dir={'': 'witpy'},
+    packages=find_packages(where='witpy'),
     python_requires='>=3.5, <4',
     install_requires=['peppercorn',  # used to convert token stream into data structure html.
                       'apply-defaults',  # Apply default values to functions.
@@ -40,8 +40,8 @@ setup(
     extras_require={  # Optional
     },
     project_urls={
-        'Bug Reports': 'https://github.com/parodyBit/witnet_client_py/issues',
-        'Source': 'https://github.com/parodyBit/witnet_client_py/',
+        'Bug Reports': 'https://github.com/parodyBit/witpy/issues',
+        'Source': 'https://github.com/parodyBit/witpy/',
     },
 )
 

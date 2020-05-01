@@ -1,0 +1,14 @@
+language: python
+python:
+- '3.5'
+- '3.6'
+- '3.7'
+- pypy3
+install: pip install -r requirements.txt
+virtualenv:
+  system_site_packages: true
+deploy:
+  provider: pipy
+  user: parody_bit
+  password:
+    secure: Ljd6cCXZzLNkbdBylVesPuKxWp9G4imraFIxe7i3OeO/SeCIg9c7OonOyQl4fUn84lqrUgakgyLAE6oqivKgXSp1IO/Faw+xfgfD1t3rgCReqEpVlV3LNboaa8ZBibcEPlcSOZeGUu5rRmfuBOK6LHR+fVBauV9+QHCOlBKOYVYsPEG81sAdKPsf2TBlAEcgqSB8ECmaV6lorVV86h8gn02uRvdXEWYOj2vIgakpb+A2vmrhq/+Zkt6+ALKlLIEitCYHJlTE0DOfWWyeBCIfPrWZpmYt04Y6L4gX63CtNK9g67t4VEhqpWskC0EnQi7JIlm54+N0k5OJczmk+ZzDM+Ja+DM6JPBSlapjK8EzW27UJfXeBUiNFs4gqNsIloZn3kE2mt4rc8D1xpiSgP4F5+yfAsZezfMmhvtDmIHQx62P+0hCEbvWHob1odwWHLMGD+eoog6RSwdLXTjX54MDR/zb+sRqTLNn49wtzQhI1mdNqfC/ZYrHQnWeUFN5pGpW5tTw9+X9Hp+MsPKuFHlGU+iuaXxqM15z3UJKCDUVVR/zJODyphvsgeqcwTicVALeH/kw9L0cQTnpDmbGdSWOGOxjqxq5W8lX30OBLbRJNXsQpnpmR9sqv8GNeeRZv8VI8djoUVcdJ08dEJ7/cujEDuQJz2hAJaphJTCGYl5dUy8=

@@ -1,8 +1,8 @@
-witnet_client_py
+witpy
 
 
 
-witnet_client_py is a library for interfacing with the Witnet protocol. ( See [Witnet.io](https://witnet.io/) for more information )
+witpy is a library for interfacing with the Witnet protocol. ( See [Witnet.io](https://witnet.io/) for more information )
 
 Built on top of websockets and jsonrpcclient, it provides an easy way to automate wallet operations by node operators and any one else who might find it useful.
 
@@ -20,7 +20,7 @@ $ pip install -r requirements.txt
 
 
 
-Until I work this into an actual package, just copy the witnet_client_py folder into your project.
+Until I work this into an actual package, just copy the witpy folder into your project.
 
 
 
@@ -33,7 +33,7 @@ Must have a Witnet node running. See the [Github](https://github.com/witnet) for
 The `WalletClient` is a singleton and can be retrieved by:
 
 ```
-from witnet_client_py import WalletClient
+from witpy import WalletClient
 
 client = WalletClient.socket(url='127.0.0.1', port=11212)
 
@@ -41,13 +41,13 @@ client = WalletClient.socket(url='127.0.0.1', port=11212)
 
  
 
-All the functions in `witnet_client_py/wallet/client.py` act as a direct passthrough of the json-rpc API provided by the Witnet wallet server. The json-rpc `"method":` is called as a client function with the `"params":` being keyword arguments `**kwargs`. It returns the raw json-rpc response from the wallet server.
+All the functions in `witpy/wallet/client.py` act as a direct passthrough of the json-rpc API provided by the Witnet wallet server. The json-rpc `"method":` is called as a client function with the `"params":` being keyword arguments `**kwargs`. It returns the raw json-rpc response from the wallet server.
 
 An example of requests:
 
 ```
-from witnet_client_py import FILTERS, REDUCERS
-import witnet_client_py as witnet
+from witpy import FILTERS, REDUCERS
+import witpy as witnet
 
 wallet_id = 'my-wallet-id'
 session_id = client.unlock_wallet(wallet_id=wallet_id, password='secret')['session_id']
