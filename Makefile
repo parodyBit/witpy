@@ -4,7 +4,7 @@ init:
 test-readme:
 	@pipenv run python setup.py check --restructuredtext --strict && ([ $$? -eq 0 ] && echo "README.md and HISTORY.md ok") || echo "Invalid markup in README.md or HISTORY.md!"
 test:
-	tox
+	detox
 ci:
 	pipenv run py.test
 publish:
