@@ -6,6 +6,7 @@ python:
  - '3.7'
 install: "make"
 script:
+ - make test-readme
  - make test
 jobs:
   include:
