@@ -1,11 +1,12 @@
-from setuptools import setup, find_packages
 from os import path, system
+import sys
+import re
 
+from setuptools import setup, find_packages
 from setuptools.command.test import test as TestCommand
 from codecs import open
 
 
-import sys
 here = path.abspath(path.dirname(__file__))
 
 
