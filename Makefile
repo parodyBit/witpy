@@ -6,7 +6,7 @@ test-readme:
 test:
 	detox
 ci:
-	pipenv run py.test
+	pipenv run py.test -n 8 --boxed --junitxml=report.xml
 flake8:
 	pipenv run flake8 --ignore=E501,F401,E128,E402,E731,F821 witpy
 coverage:
