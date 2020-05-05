@@ -7,9 +7,12 @@ python:
 install: "make"
 script:
  - make test-readme
- - make test
+ - make ci
+ cache: pip
 jobs:
   include:
+    - stage: test
+      python: '3.5'
     - stage: test
       python: '3.6'
     - stage: test
@@ -17,6 +20,8 @@ jobs:
     - stage: test
       python: 'pypy3'
       dist: xenial
+    - stage: test
+      python: '3.8'
 deploy:
   provider: pypi
   username: parody_bit
