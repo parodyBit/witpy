@@ -35,7 +35,7 @@ class PyTest(TestCommand):
 with open(path.join(here, 'README.md'), encoding='utf-8') as f:
     readme_txt = f.read()
 
-with open(path.join(here, 'LICENSE.txt'), encoding='utf-8') as f:
+with open(path.join(here, 'LICENSE'), encoding='utf-8') as f:
     license_txt = f.read()
 
 about = {}
