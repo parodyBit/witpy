@@ -2,7 +2,7 @@ from os import path, system
 import sys
 import re
 
-from setuptools import setup, find_packages
+from setuptools import setup, find_packages, find_namespace_packages
 from setuptools.command.test import test as TestCommand
 from codecs import open
 
@@ -32,7 +32,7 @@ class PyTest(TestCommand):
         errno = pytest.main(self.pytest_args)
         sys.exit(errno)
 
-with open(path.join(here, 'README.md'), encoding='utf-8') as f:
+with open(path.join(here, 'README.md'), 'r') as f:
     readme_txt = f.read()
 
 with open(path.join(here, 'LICENSE'), encoding='utf-8') as f:
@@ -50,7 +50,7 @@ if sys.argv[-1] == 'publish':
 test_requirements = [
     'pytest>=3'
 ]
-packages = ['witpy']
+packages = find_namespace_packages(include=['witpy.*'])
 setup(
     name=about['__title__'],
     version=about['__version__'],
@@ -59,7 +59,7 @@ setup(
     long_description_content_type='text/markdown',
     author_email=about['__author_email__'],
     url=about['__url__'],
-    license=license_txt,
+    license='MIT License',
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
