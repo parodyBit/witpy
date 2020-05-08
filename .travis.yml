@@ -1,13 +1,11 @@
-sudo: required
 dist: xenial
 language: python
-virtualenv:
-  system_site_packages: true
 python:
  - '3.5'
  - '3.6'
  - '3.7'
-install: "make"
+ - 'pypy3'
+
 script: make test
 deploy:
   provider: pypi
