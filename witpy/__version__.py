@@ -1,5 +1,5 @@
 ######################################################################################
-#   Testnet 0.8.0
+#   Testnet 0.9.0
 #   https://witnet.io/        ,╥φW╗,                 A Decentralized Oracle Network
 #   info@witnet.io         ,@▓▓▓▓▓╙                     connecting smart contracts
 #                        ╓@▓▓▓▓╝`    ╓@▓▓▓µ               to the rest of the world.
@@ -25,7 +25,7 @@
 #
 ######################################################################################
 __title__ = 'witpy'
-__version__ = '0.8.2'
+__version__ = '0.9.0'
 __description__ = 'A JSON RPC client for the Witnet Protocol.'
 __url__ = 'https://github.com/parodyBit/witpy'
 __author_email__ = 'parody_bit@criptext.com'
