@@ -25,7 +25,7 @@
 #
 ######################################################################################
 __title__ = 'witpy'
-__version__ = '0.8.1'
+__version__ = '0.8.2'
 __description__ = 'A JSON RPC client for the Witnet Protocol.'
 __url__ = 'https://github.com/parodyBit/witpy'
 __author_email__ = 'parody_bit@criptext.com'

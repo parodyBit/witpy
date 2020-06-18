@@ -1,4 +1,5 @@
-from witpy.util.cbor import radon_to_cbor
+from ..util.cbor import radon_to_cbor
+from .exceptions import RangeError
 
 
 class DataRequest:
@@ -51,6 +52,7 @@ class DataRequest:
             if min_consensus_percentage < 51 or min_consensus_percentage > 99:
                 raise RangeError('`min_consensus_percentage` % needs to be > 50 and < 100.', '')
         except RangeError as error:
+            print(error)
             pass
 
         self.min_consensus_percentage = min_consensus_percentage
@@ -77,7 +79,7 @@ class DataRequest:
     def create(self):
         pass
 
-    def as_json(self):
+    def to_json(self):
         return {
             "data_request": self.data_request,
             'fee': self.value,

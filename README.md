@@ -34,14 +34,16 @@ Must have a Witnet node and wallet server running. See the [Github](https://gith
 The `WalletClient` is a singleton and can be retrieved by:
 
 ```
-from witpy.wallet.client import WalletClient as  witnet
+from witpy.wallet import WalletClient
 
-client = witnet.socket(url='127.0.0.1', port=11212)
+client = WalletClient.socket(url='127.0.0.1', port=11212)
+
+print(client.create_mnemonics(length=12))
 
 ```
 All the functions in `witpy/wallet/client.py` act as a direct passthrough of the json-rpc API provided by the Witnet wallet server. The json-rpc `"method":` is called as a client function with the `"params":` being keyword arguments `**kwargs`. It returns the raw json-rpc response from the wallet server.
 
-```
+```python
 
 # Some useful methods
 
@@ -63,7 +65,7 @@ client.get_block_chain(epoch=-1, limit=1)
 
 
 An example of requests:
-```
+```python
 from witpy.wallet.client import WalletClient as  witnet
 from witpy.transactions.data_request import DataRequest as Request
 from witpy.transactions.rad_request import RadRequest

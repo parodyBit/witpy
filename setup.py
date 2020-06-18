@@ -69,18 +69,15 @@ setup(
     keywords='witnet wallet client json',
     package_dir={'witpy': 'witpy'},
     packages=packages,
-    python_requires='>=3.6, <4',
+    python_requires='>=3.4, <4',
     install_requires=['peppercorn',  # used to convert token stream into data structure html.
                       'apply-defaults',  # Apply default values to functions.
                       'attrs',  # overrides implicit detection in python.
                       'cbor',  # the CBOR library https://cbor.io/
                       'click',  # command line interface tools.
                       'importlib-metadata',  # provides for access to installed package metadata.
-                      'jsonschema',  # implementation of JSON Schema for Python.
-                      'jsonrpcclient',  # call remote procedures using the JSON-RPC message format.
                       'pyrsistent',  # immutable functional data structures.
                       'six',  # a Python 2 and 3 compatibility library.
-                      'websockets',  # WebSocket servers and clients.
                       'zipp',  # A pathlib-compatible Zipfile object wrapper.
                       ],
     cmdclass={'test': PyTest},
